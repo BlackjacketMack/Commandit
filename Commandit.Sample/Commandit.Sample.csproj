@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E5530CC-C74C-448A-A9AD-D907CD958305}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{7ADFB341-1A28-4008-81DE-117AABA04C8B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Commandit.Core</RootNamespace>
-    <AssemblyName>Commandit.Core</AssemblyName>
+    <RootNamespace>Commandit.Sample</RootNamespace>
+    <AssemblyName>Commandit.Sample</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,13 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandAttribute.cs" />
-    <Compile Include="CommandConsole.cs" />
-    <Compile Include="CommandParameters.cs" />
-    <Compile Include="ICommandParameters.cs" />
-    <Compile Include="ICommand.cs" />
+    <Compile Include="SampleCommandOne.cs" />
+    <Compile Include="Sample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HelpCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Commandit.Core\Commandit.Core.csproj">
+      <Project>{3e5530cc-c74c-448a-a9ad-d907cd958305}</Project>
+      <Name>Commandit.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
