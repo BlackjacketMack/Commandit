@@ -36,7 +36,10 @@ namespace Commandit
 
         private void load()
         {
-            var commands = this.Commands.Concat(new[] { new HelpCommand(_commandDictionary) });
+            var commands = this.Commands.Concat(new ICommand[] { 
+                                new HelpCommand(_commandDictionary), 
+                                new RunCommand(_commandDictionary)
+            });
 
             foreach (var command in commands)
             {
@@ -70,7 +73,6 @@ namespace Commandit
                 var parameters = parseInput(input);
 
                 var command = getCommand(parameters);
-
 
                 if (command != null) { 
                     runCommand(command,parameters);
@@ -113,6 +115,11 @@ namespace Commandit
 
         private void runCommand(ICommand command, CommandParameters parameters)
         {
+            var attribute = _commandDictionary.Where(w=>w.Value == command).SingleOrDefault();
+            var commandName = attribute.Key.Name;
+
+            this.WriteLine("** " + commandName + " Command **");
+
             command.Run(parameters);
 
             this.WriteLine("--");

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Commandit
 {
-    [CommandAttribute(  Name="Help",
+    [CommandAttribute(true, 
+                        Name = "Help",
                         Description="This is the default help command.")]
     public class HelpCommand : ICommand
     {
@@ -22,7 +23,7 @@ namespace Commandit
             Console.WriteLine("Welcome to the Commandit help section.");
             Console.WriteLine("--------------------------------------");
 
-            foreach (var entry in _commandDictionary)
+            foreach (var entry in _commandDictionary.OrderByDescending(ob=>ob.Key.IsInternal))
             {
                 describeEntry(entry.Key,entry.Value);
                 Console.WriteLine("");
@@ -36,6 +37,7 @@ namespace Commandit
             Console.WriteLine("Description = " + attribute.Description);
             Console.WriteLine("Order = " + attribute.Order);
             Console.WriteLine("Group = " + attribute.Group);
+            Console.WriteLine("Internal = " + attribute.IsInternal);
         }
     }
 }

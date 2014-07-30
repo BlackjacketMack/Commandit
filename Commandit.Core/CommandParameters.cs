@@ -19,21 +19,7 @@ namespace Commandit
             this.Attributes = new Dictionary<string, string>();
         }
 
-        public string GetAttribute(string key, bool required = true)
-        {
-            var containsKey = this.Attributes.ContainsKey(key);
-
-            if (required && !containsKey)
-            {
-                throw new ArgumentException("Attribute missing", key);
-            }
-            else if (!containsKey)
-            {
-                return null;
-            } 
-
-            return this.Attributes[key];
-        }
+        
 
         public const string ATTRIBUTE_KEY = "--";
         /// <summary>
@@ -51,7 +37,7 @@ namespace Commandit
             {
                 if (inputSplit[i].StartsWith(ATTRIBUTE_KEY))
                 {
-                    var key = inputSplit[i];
+                    var key = inputSplit[i].Replace(ATTRIBUTE_KEY,String.Empty);
                     var value = inputSplit.ElementAtOrDefault(i + 1);
 
                     if (value == null || value.StartsWith("--"))

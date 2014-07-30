@@ -42,6 +42,8 @@
     <Compile Include="CommandAttribute.cs" />
     <Compile Include="CommandConsole.cs" />
     <Compile Include="CommandParameters.cs" />
+    <Compile Include="ICommandParametersExtension.cs" />
+    <Compile Include="RunCommand.cs" />
     <Compile Include="ICommandParameters.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
