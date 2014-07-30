@@ -11,11 +11,11 @@ namespace Commandit
                         Description="This is the default help command.")]
     public class HelpCommand : ICommand
     {
-        private IDictionary<CommandAttribute, ICommand> _commandDictionary;
+        private IEnumerable<ICommand> _commands;
 
-        public HelpCommand(IDictionary<CommandAttribute, ICommand> commandDictionary)
+        public HelpCommand(IEnumerable<ICommand> commands)
         {
-            _commandDictionary = commandDictionary;
+            _commands = commands;
         }
 
         public void Run(ICommandParameters parameters)
@@ -23,7 +23,9 @@ namespace Commandit
             Console.WriteLine("Welcome to the Commandit help section.");
             Console.WriteLine("--------------------------------------");
 
-            foreach (var entry in _commandDictionary.OrderByDescending(ob=>ob.Key.IsInternal))
+            var dictionary = _commands.ToDictionary(k => k.GetCommandAttribute(), v=>v);
+
+            foreach (var entry in dictionary.OrderByDescending(ob => ob.Key.IsInternal))
             {
                 describeEntry(entry.Key,entry.Value);
                 Console.WriteLine("");

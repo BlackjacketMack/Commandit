@@ -16,8 +16,6 @@ namespace Commandit
             protected set;
         }
 
-        private IDictionary<CommandAttribute, ICommand> _commandDictionary = new Dictionary<CommandAttribute, ICommand>();
-
         private string _applicationName;
 
         public CommandConsole(string applicationName)
@@ -36,22 +34,11 @@ namespace Commandit
 
         private void load()
         {
-            var commands = this.Commands.Concat(new ICommand[] { 
-                                new HelpCommand(_commandDictionary), 
-                                new RunCommand(_commandDictionary)
-            });
+            var commands = this.Commands.ToList();
+            commands.Add(new HelpCommand(commands));
+            commands.Add(new RunCommand(commands));
 
-            foreach (var command in commands)
-            {
-                var attribute = command.GetType().GetCustomAttributes(typeof(CommandAttribute),false).Cast<CommandAttribute>().FirstOrDefault();
-
-                if (attribute == null)
-                {
-                    attribute = new CommandAttribute { Name = command.GetType().Name };
-                }
-
-                _commandDictionary.Add(attribute, command);
-            }
+            this.Commands = commands;
         }
 
         private void welcome()
@@ -103,7 +90,7 @@ namespace Commandit
             ICommand command = null;
             try 
             { 
-                command = _commandDictionary.Where(w => w.Key.Name.ToLower() == parameters.Name.ToLower()).Single().Value;
+                command = this.Commands.Where(w => w.GetCommandAttribute().Name.ToLower() == parameters.Name.ToLower()).Single();
             }
             catch (Exception ex)
             {
@@ -115,8 +102,7 @@ namespace Commandit
 
         private void runCommand(ICommand command, CommandParameters parameters)
         {
-            var attribute = _commandDictionary.Where(w=>w.Value == command).SingleOrDefault();
-            var commandName = attribute.Key.Name;
+            var commandName = command.GetCommandAttribute().Name;
 
             this.WriteLine("** " + commandName + " Command **");
 
