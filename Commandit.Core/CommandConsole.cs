@@ -47,7 +47,9 @@ namespace Commandit
             this.WriteLine(_applicationName);
             this.WriteLine("(powered by Commandit)");
             this.WriteLine("");
-            this.WriteLine("Type 'help' to see a list of registered commands.");
+            this.WriteLine("Current commands:");
+            this.WriteLine(String.Join(" | ",this.Commands.GetAttributes().Select(s=>s.Name)));
+            this.WriteLine("(Type 'help' to see a command details)");
             this.WriteLine("==================================================");
         }
 
@@ -61,7 +63,14 @@ namespace Commandit
 
                 var command = getCommand(parameters);
 
-                if (command != null) { 
+                if (parameters.Name == "quit")
+                {
+                    Console.WriteLine("Goodbye");
+
+                    return;
+                }
+                else if (command != null) 
+                { 
                     runCommand(command,parameters);
                 }
 

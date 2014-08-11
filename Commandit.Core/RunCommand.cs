@@ -22,10 +22,14 @@ namespace Commandit
         {
             var name = parameters.GetAttribute("name",false);
             var group = parameters.GetAttribute("group",false);
+            ICommand commandToRun = null;
 
             if (name != null)
             {
                 Console.WriteLine("Running command " + name);
+
+                commandToRun = _commands.GetCommand(name: name);
+                commandToRun.Run(parameters);
             }
             else
             {

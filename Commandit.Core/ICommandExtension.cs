@@ -19,5 +19,23 @@ namespace Commandit
 
             return attribute;
         }
+
+        public static ICommand GetCommand(  this IEnumerable<ICommand> commands,
+                                            string name = null)
+        {
+            return commands.Select(s => new
+            {
+                Command = s,
+                Attribute = s.GetCommandAttribute()
+            })
+            .Where(w => (name == null || w.Attribute.Name.Equals(name,StringComparison.OrdinalIgnoreCase)))
+            .Select(s => s.Command)
+            .SingleOrDefault();
+        }
+
+        public static IEnumerable<CommandAttribute> GetAttributes(this IEnumerable<ICommand> commands)
+        {
+            return commands.Select(s => s.GetCommandAttribute());
+        }
     }
 }
