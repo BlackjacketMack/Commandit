@@ -12,11 +12,6 @@ namespace Commandit
         {
             var attribute = command.GetType().GetCustomAttributes(typeof(CommandAttribute), false).Cast<CommandAttribute>().FirstOrDefault();
 
-            if (attribute == null)
-            {
-                attribute = new CommandAttribute { Name = command.GetType().Name };
-            }
-
             return attribute;
         }
 
@@ -28,7 +23,7 @@ namespace Commandit
                 Command = s,
                 Attribute = s.GetCommandAttribute()
             })
-            .Where(w => (name == null || w.Attribute.Name.Equals(name,StringComparison.OrdinalIgnoreCase)))
+            .Where(w => (name == null || w.Command.Name.Equals(name,StringComparison.OrdinalIgnoreCase)))
             .Select(s => s.Command)
             .SingleOrDefault();
         }

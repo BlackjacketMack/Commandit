@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 namespace Commandit
 {
     [CommandAttribute(true, 
-                        Name = "Help",
                         Description="This is the default help command.")]
     public class HelpCommand : ICommand
     {
+        public string Name
+        {
+            get { return "Help"; }
+        }
+
         private IEnumerable<ICommand> _commands;
 
         public HelpCommand(IEnumerable<ICommand> commands)
@@ -35,7 +39,7 @@ namespace Commandit
 
         private void describeEntry(CommandAttribute attribute,ICommand command)
         {
-            Console.WriteLine("Name = "  + attribute.Name);
+            Console.WriteLine("Name = " + command.Name);
             Console.WriteLine("Description = " + attribute.Description);
             Console.WriteLine("Order = " + attribute.Order);
             Console.WriteLine("Group = " + attribute.Group);

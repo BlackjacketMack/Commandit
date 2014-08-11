@@ -45,10 +45,10 @@ namespace Commandit
         {
             this.WriteLine("==================================================");
             this.WriteLine(_applicationName);
-            this.WriteLine("(powered by Commandit)");
+            this.WriteLine("[powered by Commandit]");
             this.WriteLine("");
             this.WriteLine("Current commands:");
-            this.WriteLine(String.Join(" | ",this.Commands.GetAttributes().Select(s=>s.Name)));
+            this.WriteLine(String.Join(" | ",this.Commands.Select(s=>s.Name)));
             this.WriteLine("(Type 'help' to see a command details)");
             this.WriteLine("==================================================");
         }
@@ -99,7 +99,7 @@ namespace Commandit
             ICommand command = null;
             try 
             { 
-                command = this.Commands.Where(w => w.GetCommandAttribute().Name.ToLower() == parameters.Name.ToLower()).Single();
+                command = this.Commands.Where(w => w.Name.ToLower() == parameters.Name.ToLower()).Single();
             }
             catch (Exception ex)
             {
@@ -111,7 +111,7 @@ namespace Commandit
 
         private void runCommand(ICommand command, CommandParameters parameters)
         {
-            var commandName = command.GetCommandAttribute().Name;
+            var commandName = command.Name;
 
             this.WriteLine("** " + commandName + " Command **");
 

@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 namespace Commandit
 {
     [CommandAttribute(true,
-                        Name="Run",
                         Description = "This Run Command is used to invoke other commands. For example: run --all, run --name MyCommand, run --group MyGroup, run --step 3 ")]
     public class RunCommand : ICommand
     {
+        public string Name
+        {
+            get { return "Run"; }
+        }
+
         private IEnumerable<ICommand> _commands;
 
         public RunCommand(IEnumerable<ICommand> commands)

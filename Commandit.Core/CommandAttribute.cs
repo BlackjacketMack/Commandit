@@ -11,7 +11,6 @@ namespace Commandit
     [AttributeUsage(AttributeTargets.Class,AllowMultiple=false)]
     public class CommandAttribute : Attribute
     {
-        public string Name { get; set; }
         public string Group { get; set; }
         public string Description { get; set; }
         public int Order { get; set; }

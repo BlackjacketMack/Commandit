@@ -23,7 +23,7 @@ namespace Commandit.Sample
         public override void Init()
         {
             this.Commands = new ICommand[]{
-                new SampleCommandOne()
+                new SampleCommand()
             };
             
             base.Init();
