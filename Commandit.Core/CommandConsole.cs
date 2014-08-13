@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Commandit
 {
-    public abstract class CommandConsole
+    public abstract class CommandConsole : ICommandConsole
     {
         public IEnumerable<ICommand> Commands
         {
@@ -125,63 +125,5 @@ namespace Commandit
 
             this.WriteLine("--");
         }
-
-        #region Util
-
-        public void WriteLine(string message, string lineBreak = null)
-        {
-            Console.WriteLine(message);
-
-            if (lineBreak != null)
-            {
-                Console.WriteLine(lineBreak);
-            }
-        }
-
-        public string ReadParameters(string message, params string[] allowedParameters)
-        {
-            Console.WriteLine("");
-            Console.Write(message);
-
-            var input = Console.ReadLine()
-                               .Trim()
-                               .ToLowerInvariant();
-
-            if (allowedParameters.Any() && !allowedParameters.Contains(input))
-            {
-                Console.WriteLine("Unknown input...");
-                input = ReadParameters(message, allowedParameters);
-            }
-
-            return input;
-        }
-
-        public string ReadLine()
-        {
-            return Console.ReadLine()
-                               .Trim()
-                               .ToLowerInvariant();
-        }
-
-        public void WriteError(string message)
-        {
-            Console.WriteLine("ERROR: " + message);
-        }
-
-        public bool Confirm()
-        {
-            var input = ReadParameters("Is this correct? (yes | no)", "yes", "no");
-
-            if (input == "yes")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        #endregion
     }
 }
