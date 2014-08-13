@@ -22,8 +22,10 @@ namespace Commandit
             _commands = commands;
         }
 
-        public void Run(ICommandParameters parameters)
+        public void Run(ICommandContext context)
         {
+            var parameters = context.Parameters;
+
             var name = parameters.GetAttribute("name",false);
             var group = parameters.GetAttribute("group",false);
             ICommand commandToRun = null;
@@ -33,7 +35,7 @@ namespace Commandit
                 Console.WriteLine("Running command " + name);
 
                 commandToRun = _commands.GetCommand(name: name);
-                commandToRun.Run(parameters);
+                commandToRun.Run(context);
             }
             else
             {

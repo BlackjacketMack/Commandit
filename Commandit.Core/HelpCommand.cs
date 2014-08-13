@@ -22,7 +22,7 @@ namespace Commandit
             _commands = commands;
         }
 
-        public void Run(ICommandParameters parameters)
+        public void Run(ICommandContext context)
         {
             Console.WriteLine("Welcome to the Commandit help section.");
             Console.WriteLine("--------------------------------------");

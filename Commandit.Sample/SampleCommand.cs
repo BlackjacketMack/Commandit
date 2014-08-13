@@ -16,9 +16,9 @@ namespace Commandit.Sample
             get { return "SampleCommand"; }
         }
 
-        public void Run(ICommandParameters parameters)
+        public void Run(ICommandContext context)
         {
-            Console.Write("Hi");
+            context.Logger.WriteLine("Hi");
         }
     }
 }

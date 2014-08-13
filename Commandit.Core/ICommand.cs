@@ -9,6 +9,6 @@ namespace Commandit
     public interface ICommand
     {
         string Name { get; }
-        void Run(ICommandParameters parameters);
+        void Run(ICommandContext context);
     }
 }

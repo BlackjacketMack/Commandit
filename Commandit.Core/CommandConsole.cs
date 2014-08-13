@@ -125,7 +125,7 @@ namespace Commandit
 
             this.WriteLine("** " + commandName + " Command **");
 
-            context.Command.Run(context.Parameters);
+            context.Command.Run(context);
 
             this.WriteLine("--");
         }
