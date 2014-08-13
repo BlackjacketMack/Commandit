@@ -69,7 +69,7 @@ namespace Commandit
 
                 var command = getCommand(parameters);
 
-                var logger = new CommandLogger();
+                var logger = new CommandLogger(this);
 
                 var context = new CommandContext(logger, parameters, command);
 

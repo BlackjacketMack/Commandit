@@ -9,5 +9,6 @@ namespace Commandit
     public interface ICommandLogger
     {
         void WriteLine(string message);
+        bool Confirm();
     }
 }
