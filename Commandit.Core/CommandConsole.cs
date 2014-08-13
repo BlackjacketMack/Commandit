@@ -69,6 +69,8 @@ namespace Commandit
 
                 var command = getCommand(parameters);
 
+                var context = new CommandContext(this, parameters, command);
+
                 if (parameters.Name == "quit")
                 {
                     Console.WriteLine("Goodbye");
@@ -76,8 +78,8 @@ namespace Commandit
                     return;
                 }
                 else if (command != null) 
-                { 
-                    runCommand(command,parameters);
+                {
+                    runCommand(context);
                 }
 
             }
@@ -115,13 +117,13 @@ namespace Commandit
             return command;
         }
 
-        private void runCommand(ICommand command, CommandParameters parameters)
+        private void runCommand(ICommandContext context)
         {
-            var commandName = command.Name;
+            var commandName = context.Command.Name;
 
             this.WriteLine("** " + commandName + " Command **");
 
-            command.Run(parameters);
+            context.Command.Run(context.Parameters);
 
             this.WriteLine("--");
         }
