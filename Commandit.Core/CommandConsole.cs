@@ -69,7 +69,9 @@ namespace Commandit
 
                 var command = getCommand(parameters);
 
-                var context = new CommandContext(this, parameters, command);
+                var logger = new CommandLogger();
+
+                var context = new CommandContext(logger, parameters, command);
 
                 if (parameters.Name == "quit")
                 {

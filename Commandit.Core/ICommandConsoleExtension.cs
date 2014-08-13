@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Commandit
 {
-    public static class ICommandConsoleExtension
+    internal static class ICommandConsoleExtension
     {
         public static void WriteLine(this ICommandConsole console, string message, string lineBreak = null)
         {

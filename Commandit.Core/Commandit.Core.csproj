@@ -39,10 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLogger.cs" />
     <Compile Include="CommandAttribute.cs" />
     <Compile Include="CommandContext.cs" />
     <Compile Include="CommandConsole.cs" />
     <Compile Include="CommandParameters.cs" />
+    <Compile Include="ICommandLogger.cs" />
     <Compile Include="ICommandContext.cs" />
     <Compile Include="ICommandConsole.cs" />
     <Compile Include="ICommandConsoleExtension.cs" />

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Commandit
 {
-    public interface ICommandContext
+    internal interface ICommandContext
     {
-        ICommandConsole Console { get; }
+        ICommandLogger Logger { get; }
         ICommandParameters Parameters { get; }
         ICommand Command { get; }
     }
