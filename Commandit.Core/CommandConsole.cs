@@ -34,6 +34,12 @@ namespace Commandit
 
         private void load()
         {
+            if (this.Commands == null || !this.Commands.Any())
+            {
+                Console.WriteLine("You have not registered any commands.");
+                return;
+            }
+
             var commands = this.Commands.ToList();
             commands.Add(new HelpCommand(commands));
             commands.Add(new RunCommand(commands));
